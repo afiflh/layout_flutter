@@ -43,16 +43,81 @@ class MyApp extends StatelessWidget {
       ),
     );
 
+    Column _buildButtonColumn(Color color, IconData icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color),
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Color color = Theme.of(context).primaryColor;
+
+  Widget buttonSection = Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      _buildButtonColumn(color, Icons.call, 'CALL'),
+      _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
+      _buildButtonColumn(color, Icons.share, 'SHARE'),
+    ],
+  );
+
+  Widget textSection = Container(
+    padding: const EdgeInsets.all(32),
+    child: Column(
+      children: [
+        Image.asset(
+          'assets/bns.png',
+          width: 200,
+          height: 200,
+          fit: BoxFit.cover,
+        ),
+        const SizedBox(height: 12),
+        const Text(
+          'Batu Night Spectacular (BNS) adalah salah satu destinasi wisata yang populer di Kota Batu, Jawa Timur. '
+          'BNS menawarkan pengunjungnya pengalaman hiburan malam yang unik dengan '
+          'beragam wahana, pertunjukan panggung, dan suasana yang bercahaya. '
+          'Afif Lukmanul Hakim dan 2141720262 ',
+          softWrap: true,
+        ),
+      ],
+    )
+    
+  );
+
     return MaterialApp(
-      title: 'Flutter layout: Nama dan NIM Anda',
+      title: 'Flutter layout: Afif Lukmanul Hakim dan 2141720262',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Flutter layout demo'),
         ),
-        body: const Center(
-          child: Text('Hello World'),
+        body: ListView(
+          children: [
+            Image.asset(
+              'assets/lake.jpg',
+              width: 600,
+              height: 240,
+              fit: BoxFit.cover,
+            ),
+            titleSection,
+            textSection,
+            buttonSection
+          ],
+        )
         ),
-      ),
-    );
+      );
   }
 }
